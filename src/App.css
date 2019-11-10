@@ -11,7 +11,7 @@ form {
   flex-direction: column;
 }
 
-label {
+p {
   font-size: 60px;
   margin-bottom: 50px;
 }
@@ -29,6 +29,7 @@ label {
   border-radius: 10px;
   background-color: rgb(167, 61, 199);
   color: white;
+  padding-left: 80px;
 }
 /* input[type="submit"]::-webkit-inner-spin-button,
 input[type="submit"]::-webkit-outer-spin-button {
@@ -38,4 +39,7 @@ input[type="submit"]::-webkit-outer-spin-button {
 .todolist {
   margin: 15px 0 15px 0;
   line-height: 170%;
+}
+.done {
+  text-decoration: line-through;
 }

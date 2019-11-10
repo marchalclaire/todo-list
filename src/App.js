@@ -4,7 +4,7 @@ import "./App.css";
 const App = () => {
   const [taskInput, setTaskInput] = useState("");
   const [tasks, setTasks] = useState([]);
-  //Option 1: on peut créer un tab vide, boucler et l'intégrer dans le return ({return} sans balise car déjà traité ligne 12)
+  //Option 1: on peut créer un tab vide, boucler et l'intégrer dans le return ({return} sans balise car déjà traitées ligne 12)
   // + appeler la fonction (toDoList();) dans le "onSubmit" : sinon créer fonction ".map" dans le formulaire ligne 31.
 
   //let result = [];
@@ -16,34 +16,63 @@ const App = () => {
 
   return (
     <div className="App">
-      <label>To-Do list</label>
+      <p>To-Do list</p>
       {/* {result} */}
 
-      <form
-        onSubmit={event => {
-          event.preventDefault();
+      <div className="todolist">
+        {tasks.map((task, index) => {
+          return (
+            <>
+              <span
+                onClick={event => {
+                  const newTasks = [...tasks];
+                  newTasks.splice(index, 1);
+                  setTasks(newTasks);
+                }}
+              >
+                X{" "}
+              </span>
+              <span
+                key={index}
+                onClick={event => {
+                  const newTasks = [...tasks];
+
+                  //newTasks[index].done =
+                  // newTasks[index].done === true ? false : true; OU
+
+                  newTasks[index].done = !newTasks[index].done;
+
+                  setTasks(newTasks);
+                }}
+                className={task.done === true ? "done" : ""}
+              >
+                {task.todo}
+              </span>{" "}
+              <br />
+            </>
+          );
+        })}
+      </div>
+      <input
+        placeholder="Titre"
+        type="text"
+        value={taskInput}
+        className="text-input"
+        onChange={event => {
+          setTaskInput(event.target.value);
+        }}
+      />
+      <input
+        className="button"
+        onClick={event => {
           const newTasks = [...tasks];
-          newTasks.push({ todo: taskInput });
+          newTasks.push({ todo: taskInput, done: false });
           setTasks(newTasks);
+          setTaskInput("");
           // toDoList();
         }}
-      >
-        <div className="todolist">
-          {tasks.map((task, index) => {
-            return <div key={index}>{"X " + task.todo}</div>;
-          })}
-        </div>
-        <input
-          placeholder="Titre"
-          type="text"
-          className="text-input"
-          value={taskInput}
-          onChange={event => {
-            setTaskInput(event.target.value);
-          }}
-        />
-        <input className="button" type="submit" value="AJOUTER UNE TACHE" />
-      </form>
+        value="AJOUTER UNE TACHE"
+      />
     </div>
   );
 };
