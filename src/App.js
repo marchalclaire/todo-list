@@ -65,11 +65,13 @@ const App = () => {
       <input
         className="button"
         onClick={event => {
-          const newTasks = [...tasks];
-          newTasks.push({ todo: taskInput, done: false });
-          setTasks(newTasks);
-          setTaskInput("");
-          // toDoList();
+          if (taskInput) {
+            const newTasks = [...tasks];
+            newTasks.push({ todo: taskInput, done: false });
+            setTasks(newTasks);
+            setTaskInput("");
+            // toDoList();
+          }
         }}
         value="AJOUTER UNE TACHE"
       />
